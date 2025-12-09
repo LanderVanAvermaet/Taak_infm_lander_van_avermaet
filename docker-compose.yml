@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  # Node-RED service
+  node-red:
+    image: nodered/node-red:latest
+    container_name: node-red
+    restart: unless-stopped
+    ports:
+      - "1880:1880"
+    volumes:
+      - ./data/node-red-data:/data
+
+  # Mosquitto MQTT broker
+  mosquitto:
+    image: eclipse-mosquitto:latest
+    container_name: mosquitto
+    restart: unless-stopped
+    ports:
+      - "1883:1883"
+    volumes:
+      - ./data/mosquitto-config/mosquitto.conf:/mosquitto/config/mosquitto.conf

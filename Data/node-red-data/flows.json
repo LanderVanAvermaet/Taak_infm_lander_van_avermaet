@@ -1,0 +1,665 @@
+[
+    {
+        "id": "f6f2187d.f17ca8",
+        "type": "tab",
+        "label": "Flow 1",
+        "disabled": false,
+        "info": ""
+    },
+    {
+        "id": "9f1df0f01bd03c22",
+        "type": "mqtt-broker",
+        "name": "",
+        "broker": "broker.hivemq.com",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": 4,
+        "keepalive": 60,
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "5ffd3165edb66a3b",
+        "type": "ui_tab",
+        "name": "Home",
+        "icon": "dashboard",
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "a894d2fe35f1ae7b",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0080c0",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0080c0",
+                    "edited": true
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0080c0",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#0daeff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0080c0",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "c27f82536401e521",
+        "type": "ui_group",
+        "name": "Slimme regenwaterput",
+        "tab": "5ffd3165edb66a3b",
+        "order": 1,
+        "disp": true,
+        "width": 6,
+        "collapse": true,
+        "className": ""
+    },
+    {
+        "id": "abd23d3e19ed8960",
+        "type": "influxdb",
+        "hostname": "127.0.0.1",
+        "port": 8086,
+        "protocol": "http",
+        "database": "database",
+        "name": "Influx db",
+        "usetls": false,
+        "tls": "",
+        "influxdbVersion": "2.0",
+        "url": "https://us-east-1-1.aws.cloud2.influxdata.com/",
+        "timeout": 10,
+        "rejectUnauthorized": true
+    },
+    {
+        "id": "1ac03edf12b9756f",
+        "type": "mqtt in",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "Tempdata",
+        "qos": "1",
+        "datatype": "utf8",
+        "broker": "9f1df0f01bd03c22",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 80,
+        "y": 60,
+        "wires": [
+            [
+                "3d1b8a8cad34713a"
+            ]
+        ]
+    },
+    {
+        "id": "5907cf52bc3b2714",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Vochtigheid uitlezen",
+        "func": "msg.payload = msg.payload.hum;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 260,
+        "wires": [
+            [
+                "c36ad89081db85d8"
+            ]
+        ]
+    },
+    {
+        "id": "ca55d7f4f46d49cb",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 4,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Temp. Gauge",
+        "label": "°C",
+        "format": "{{msg.payload.temp}}",
+        "min": "-40",
+        "max": "80",
+        "colors": [
+            "#ff0000",
+            "#00ff00",
+            "#ff8000"
+        ],
+        "seg1": "20",
+        "seg2": "",
+        "diff": false,
+        "className": "",
+        "x": 720,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "0181272c190901f3",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 7,
+        "width": 0,
+        "height": 0,
+        "label": "Temp. Grafiek",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 720,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "4f680628b1b5c0fc",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 5,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Vocht. Gauge",
+        "label": "%",
+        "format": "{{msg.payload.hum}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "33",
+        "seg2": "66",
+        "diff": false,
+        "className": "",
+        "x": 720,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c36ad89081db85d8",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 8,
+        "width": 0,
+        "height": 0,
+        "label": "Vocht. Grafiek",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 720,
+        "y": 260,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "300d8026f7990a99",
+        "type": "ui_slider",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "label": "Hoek van luik",
+        "tooltip": "",
+        "group": "c27f82536401e521",
+        "order": 3,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "outs": "all",
+        "topic": "topic",
+        "topicType": "msg",
+        "min": 0,
+        "max": "90",
+        "step": 1,
+        "className": "",
+        "x": 720,
+        "y": 540,
+        "wires": [
+            [
+                "b3c401fc8c4d6130"
+            ]
+        ]
+    },
+    {
+        "id": "b3c401fc8c4d6130",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "servo",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f1df0f01bd03c22",
+        "x": 890,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "c21190ea059fcd26",
+        "type": "mqtt out",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "topic": "pomp",
+        "qos": "1",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "9f1df0f01bd03c22",
+        "x": 890,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "9a9a8aa62d168b93",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Waterniveau uitlezen",
+        "func": "msg.payload = msg.payload.water;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 360,
+        "wires": [
+            [
+                "04a190f2672a0ef2"
+            ]
+        ]
+    },
+    {
+        "id": "2a945dc93560b8e6",
+        "type": "ui_gauge",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 6,
+        "width": 0,
+        "height": 0,
+        "gtype": "gage",
+        "title": "Wateniveau Gauge",
+        "label": "%",
+        "format": "{{msg.payload.water}}",
+        "min": 0,
+        "max": "100",
+        "colors": [
+            "#00b500",
+            "#e6e600",
+            "#ca3838"
+        ],
+        "seg1": "33",
+        "seg2": "66",
+        "diff": false,
+        "className": "",
+        "x": 730,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "04a190f2672a0ef2",
+        "type": "ui_chart",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "group": "c27f82536401e521",
+        "order": 9,
+        "width": 0,
+        "height": 0,
+        "label": "Waterniveau Grafiek",
+        "chartType": "line",
+        "legend": "false",
+        "xformat": "HH:mm:ss",
+        "interpolate": "linear",
+        "nodata": "",
+        "dot": false,
+        "ymin": "",
+        "ymax": "",
+        "removeOlder": 1,
+        "removeOlderPoints": "",
+        "removeOlderUnit": "3600",
+        "cutout": 0,
+        "useOneColor": false,
+        "useUTC": false,
+        "colors": [
+            "#1f77b4",
+            "#aec7e8",
+            "#ff7f0e",
+            "#2ca02c",
+            "#98df8a",
+            "#d62728",
+            "#ff9896",
+            "#9467bd",
+            "#c5b0d5"
+        ],
+        "outputs": 1,
+        "useDifferentColor": false,
+        "className": "",
+        "x": 740,
+        "y": 360,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7c515e2cdc57d968",
+        "type": "ui_switch",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "label": "Pomp aan/uit",
+        "tooltip": "",
+        "group": "c27f82536401e521",
+        "order": 2,
+        "width": 0,
+        "height": 0,
+        "passthru": true,
+        "decouple": "false",
+        "topic": "topic",
+        "topicType": "msg",
+        "style": "",
+        "onvalue": "true",
+        "onvalueType": "bool",
+        "onicon": "",
+        "oncolor": "",
+        "offvalue": "false",
+        "offvalueType": "bool",
+        "officon": "",
+        "offcolor": "",
+        "animate": false,
+        "className": "",
+        "x": 710,
+        "y": 600,
+        "wires": [
+            [
+                "c21190ea059fcd26"
+            ]
+        ]
+    },
+    {
+        "id": "3d1b8a8cad34713a",
+        "type": "json",
+        "z": "f6f2187d.f17ca8",
+        "name": "",
+        "property": "payload",
+        "action": "",
+        "pretty": false,
+        "x": 250,
+        "y": 60,
+        "wires": [
+            [
+                "5907cf52bc3b2714",
+                "9a9a8aa62d168b93",
+                "ca55d7f4f46d49cb",
+                "4ca32860ca3899d0",
+                "4f680628b1b5c0fc",
+                "2a945dc93560b8e6",
+                "e58df1f04fe0cb3d",
+                "8c1fafeef3b9d624",
+                "ebac2d694b8155e5"
+            ]
+        ]
+    },
+    {
+        "id": "4ca32860ca3899d0",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Temperatuur uitlezen",
+        "func": "msg.payload = msg.payload.temp;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 460,
+        "y": 160,
+        "wires": [
+            [
+                "0181272c190901f3"
+            ]
+        ]
+    },
+    {
+        "id": "e58df1f04fe0cb3d",
+        "type": "debug",
+        "z": "f6f2187d.f17ca8",
+        "name": "Debugger",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 420,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "8c1fafeef3b9d624",
+        "type": "ui_text",
+        "z": "f6f2187d.f17ca8",
+        "group": "c27f82536401e521",
+        "order": 1,
+        "width": 0,
+        "height": 0,
+        "name": "",
+        "label": "Status pomp",
+        "format": "{{msg.payload.pump_state}}",
+        "layout": "col-center",
+        "className": "",
+        "style": true,
+        "font": "",
+        "fontSize": 16,
+        "color": "#ff8000",
+        "x": 710,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "f3d6ac220744b0c2",
+        "type": "influxdb out",
+        "z": "f6f2187d.f17ca8",
+        "influxdb": "abd23d3e19ed8960",
+        "name": "",
+        "measurement": "slimme_regenwaterput",
+        "precision": "",
+        "retentionPolicy": "",
+        "database": "database",
+        "precisionV18FluxV20": "s",
+        "retentionPolicyV18Flux": "",
+        "org": "KU Leuven",
+        "bucket": "INFM project",
+        "x": 810,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "ebac2d694b8155e5",
+        "type": "function",
+        "z": "f6f2187d.f17ca8",
+        "name": "Fields creëeren",
+        "func": "msg.payload = {\n    temperatuur: Number(msg.payload.temp),\n    hum: Number(msg.payload.hum),\n    waterniveau: Number(msg.payload.water),\n    statusPomp: Boolean(msg.payload.pump_state)\n};\n\nmsg.tags = {\n    type: \"slimme_regenwaterput\"   // algemene tag\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 440,
+        "wires": [
+            [
+                "f3d6ac220744b0c2"
+            ]
+        ]
+    }
+]
